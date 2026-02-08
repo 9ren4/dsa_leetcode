@@ -1,35 +1,35 @@
 class Solution:
-    def threeSum(self, nums: list[int]) -> list[list[int]]:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
         nums.sort()
-        result = 0
         final_result = []
-        n = -1
-        m = -2
-        for i in nums:
-            mini_list = []
-            if i >= 0:
-                break
-            else:
-                result = i + nums[n] + nums[m]
-                if result == 0:  
-                    mini_list.append([i, nums[n], nums[n]])
-                    n -= 1
-                    m -= 1
-                    final_result.append(mini_list)     
+        n = len(nums)
 
+        for i in range(n):
+            if i>0 and nums[i] == nums[i-1]:
+                continue
+
+
+            left = i+1
+            right = n-1
+
+            while left < right:
+                total = nums[i] + nums[left] + nums[right]
+
+                if total == 0:
+                    final_result.append([nums[i], nums[left], nums[right]])
+
+                    # skip duplicates
+                    while left < right and nums[left] == nums[left + 1]:
+                        left += 1
+                    while left < right and nums[right] == nums[right - 1]:
+                        right -= 1
+
+                    left += 1
+                    right -= 1
+
+                elif total < 0:
+                    left += 1
                 else:
-                    n -= 1
-                    m -= 1 
-                    continue
+                    right -= 1
 
-        return final_result            
-    
-
-# ---- user input + function call ----
-nums = list(map(int, input("Enter numbers separated by spaces: ").split()))
-
-solution = Solution()
-output = solution.threeSum(nums)
-
-print("Triplets that sum to zero:")
-print(output)
+        return final_result          

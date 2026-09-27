@@ -4,6 +4,7 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+#
 class Solution:
     def kthSmallest(self, root: TreeNode | None, k: int) -> int:
         if not root:

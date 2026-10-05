@@ -22,4 +22,19 @@ class Solution:
             return 1
         else:
             return result
+#This is the optimized version of the above code
+class Solution:
+    def longestConsecutive(self, nums: list[int]) -> int:
+        set_num = set(nums)
+        result = 0
 
+        for i in set_num:
+            if i - 1 not in set_num:
+                count = 1
+
+                while i + count in set_num:
+                    count += 1
+
+                result = max(count, result)
+
+        return result
